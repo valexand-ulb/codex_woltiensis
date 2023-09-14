@@ -10,7 +10,7 @@ class DefaultAppBar extends AppBar {
   final IconThemeData iconTheme = const IconThemeData(color: Colors.black);
 
   @override
-  final Color backgroundColor = Colors.white;
+  final Color backgroundColor = Color(0xFFEC2143);
 
   @override
   final bool centerTitle = true;

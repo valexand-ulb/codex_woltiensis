@@ -50,13 +50,14 @@ class _SongDetailState extends State<SongDetail>{
     List<Widget> widgets = <Widget>[];
     widgets.add(BannerImage(song.url, 170.0));
     widgets.add(_renderTitle(song.name));
+    widgets.add(_renderSubTitle(song.comments));
     widgets.add(_renderText(song.text ?? ''));
     return widgets;
   }
 
   Container _renderTitle(String name){
     return Container(
-      padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 10.0),
+      padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 5.0),
       child: Text(
         name,
         textAlign: TextAlign.left,
@@ -65,10 +66,21 @@ class _SongDetailState extends State<SongDetail>{
     );
   }
 
+  Container _renderSubTitle(String subtitle){
+    return Container(
+      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 10.0),
+      child: Text(
+        subtitle,
+        textAlign: TextAlign.left,
+        style: Styles.locationTitleSubTitle,
+      ),
+    );
+  }
+
   Container _renderText(String text){
     return Container(
       padding: const EdgeInsets.fromLTRB(25.0, 15.0, 25.0, 15.0),
-      child: Text(text),
+      child: Text(text, style: Styles.textDefault),
     );
   }
 }
