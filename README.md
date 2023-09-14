@@ -21,11 +21,11 @@ From there, you can open the project in your favorite IDE or text editor, and ru
 ## Features
 
 The Codex Woltiensis Songbook App will probably one day includes the following features (non exhaustive):
-- [ ] View a list of songs in the collection
+- [x] View a list of songs in the collection
 - [ ] Save your favorite songs for easy access
 - [ ] Search for songs by title, artist, or lyrics
-- [ ] View the lyrics and chords for each song
-- [ ]  Dark mode support
+- [x] View the lyrics and chords for each song
+- [x]  Dark mode support
 - [ ]  Songs editor
 
 ## Acknowledgements
