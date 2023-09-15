@@ -22,9 +22,9 @@ class SongTile extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: darkTheme
-              ? Styles.locationTitleDark
-              : Styles.locationTitleLight),
-          Text(subtitle, style: Styles.locationTitleSubTitle),
+              ? Styles.songTitleDark
+              : Styles.songTitleLight),
+          Expanded(child: Text(subtitle, style: Styles.songTitleSubTitle)),
         ],
       ),
     );

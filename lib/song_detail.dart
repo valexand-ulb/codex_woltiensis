@@ -72,7 +72,7 @@ class _SongDetailState extends State<SongDetail>{
       child: Text(
         subtitle,
         textAlign: TextAlign.left,
-        style: Styles.locationTitleSubTitle,
+        style: Styles.songDetailTitleSubTitle,
       ),
     );
   }

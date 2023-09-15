@@ -11,7 +11,7 @@ class Styles {
   static const Color _textColorDefault = Color(0xFF000000);
   static const Color _textColorFaint = Color(0xFF999999);
   static const Color textColorBright = Color(0xFFFFFFFF);
-  static const Color accentColor = Color(0xFF999999);
+  static const Color accentColor = Color(0xFFFDDB20);
   static const String _fontNameDefault = 'PlayfairDisplay';
 
   static const navBarTitle = TextStyle(
@@ -35,25 +35,31 @@ class Styles {
     height: 1.2,
   );
 
-  static const locationTitleLight = TextStyle(
+  static const songTitleLight = TextStyle(
     fontFamily: _fontNameDefault,
     fontSize: _textSizeLarge,
     color: _textColorStrong,
   );
 
-  static const locationTitleDark = TextStyle(
+  static const songTitleDark = TextStyle(
     fontFamily: _fontNameDefault,
     fontSize: _textSizeLarge,
     color: textColorBright,
   );
 
-  static const locationTitleSubTitle = TextStyle(
+  static const songTitleSubTitle = TextStyle(
     fontFamily: _fontNameDefault,
     fontSize: _textSizeDefault,
     color: accentColor,
   );
 
-  static const locationTitleCaption = TextStyle(
+  static const songDetailTitleSubTitle = TextStyle(
+    fontFamily: _fontNameDefault,
+    fontSize: _textSizeSmall,
+    color: _textColorFaint,
+  );
+
+  static const songTitleCaption = TextStyle(
     fontFamily: _fontNameDefault,
     fontSize: _textSizeSmall,
     color: _textColorFaint,
