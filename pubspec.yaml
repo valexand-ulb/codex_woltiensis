@@ -39,6 +39,7 @@ dependencies:
   http: ^0.13.6
   build_runner: ^2.3.3
   json_serializable: ^6.6.2
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

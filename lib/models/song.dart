@@ -29,7 +29,6 @@ class Song{
 
   static Future<List<Song>> fetchAll() async {
     Uri uri = Endpoint.uri('codex_woltiensis.json');
-    print(uri.toString());
 
     final http.Response resp = await http.get(uri);
 
@@ -47,7 +46,6 @@ class Song{
 
   static Future<Song> fetchByID(int id) async {
     Uri uri = Endpoint.uri('songs/$id.json');
-    print(uri.toString());
 
     final http.Response resp = await http.get(uri);
 

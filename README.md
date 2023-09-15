@@ -28,6 +28,14 @@ The Codex Woltiensis Songbook App will probably one day includes the following f
 - [x]  Dark mode support
 - [ ]  Songs editor
 
+## TODO's
+- [ ] 📄 Format the text of the songs to render bold, italic, etc.
+- [ ] 🔧 Add a search bar
+- [ ] 🔧 Add a favorites page
+- [ ] 🔧 Add a settings page
+- [ ] 🔧 Add a song editor
+
+
 ## Acknowledgements
 ⚠️ This project is made by a student trying to learn the flutter framework. The code will be subject to a lot of changes for learning purposes.
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class BannerImage extends StatelessWidget {
   final String url;
@@ -8,16 +9,16 @@ class BannerImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Image? image;
-    try {
-      image = Image.network(url, fit: BoxFit.fitWidth);
-    }
-    catch (e) {
-      print('Could not load image $url');
-    }
+    CachedNetworkImage image = CachedNetworkImage(
+      imageUrl: url,
+      fit: BoxFit.fitWidth,
+      placeholder: (context, url) => const CircularProgressIndicator(color: Colors.white),
+      errorWidget: (context, url, error) => Container(),
+    );
+
     return Container(
       constraints: BoxConstraints.expand(height: height),
-      child: image ?? Container(),
+      child: image,
     );
   }
 }
