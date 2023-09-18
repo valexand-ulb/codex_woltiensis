@@ -29,7 +29,7 @@ The Codex Woltiensis Songbook App will probably one day includes the following f
 - [ ]  Songs editor
 
 ## TODO's
-- [ ] 📄 Format the text of the songs to render bold, italic, etc.
+- [x] Rendering of bold, italic, and underlined text due to markdown
 - [ ] 🔧 Add a search bar
 - [ ] 🔧 Add a favorites page
 - [ ] 🔧 Add a settings page
