@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:codex_woltiensis/endpoint.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
-import 'package:codex_woltiensis/endpoint.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'song.g.dart';
 
@@ -54,6 +56,30 @@ class Song{
     }
 
     final Map<String, dynamic> itemMap = json.decode(resp.body);
+    saveJsonToFile(itemMap);
     return Song.fromJson(itemMap);
   }
+
+  static void saveJsonToFile(Map<String, dynamic> itemMap) async {
+    final int id = itemMap['id'];
+    final jsonString = json.encode(itemMap);
+
+    final Directory tempDirectory = await getTemporaryDirectory();
+    final File file = File('${tempDirectory.path}/$id.json');
+    print('Saving to : ${tempDirectory.path}/$id.json');
+    file.writeAsString(jsonString);
+  }
+
+  static Future<Song> fetchByFile(int songID) async {
+    Directory tempDir = await getTemporaryDirectory();
+    File file = File('${tempDir.path}/$songID.json');
+
+    String fileContent = await file.readAsString();
+    Map<String, dynamic> itemMap = json.decode(fileContent);
+
+    print('Loaded song: "${itemMap['name']}" from cache');
+    return Song.fromJson(itemMap);
+  }
+
+
 }

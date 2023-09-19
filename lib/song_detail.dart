@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:codex_woltiensis/components/banner_image.dart';
 import 'package:codex_woltiensis/components/default_app_bar.dart';
 import 'package:codex_woltiensis/models/song.dart';
 import 'package:codex_woltiensis/style.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 class SongDetail extends StatefulWidget {
   final int songID;
@@ -27,10 +30,25 @@ class _SongDetailState extends State<SongDetail> {
   }
 
   void _loadSong() async {
-    final Song song = await Song.fetchByID(songID);
+    bool fileExists = await _isSongCached();
+    final Song song;
+
+    if (fileExists){
+      song = await Song.fetchByFile(songID);
+    } else {
+      song = await Song.fetchByID(songID);
+      print('Loaded song: "${song.name}" from server');
+    }
     if (mounted) {
       setState(() => this.song = song);
     }
+  }
+
+  Future<bool> _isSongCached() async {
+    final Directory tempDirectory = await getTemporaryDirectory();
+    final File file = File('${tempDirectory.path}/$songID.json');
+    bool fileExists = await file.exists();
+    return fileExists;
   }
 
   @override
