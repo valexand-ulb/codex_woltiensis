@@ -12,7 +12,7 @@ To get started with this app, you'll need to have Flutter installed on your mach
 Once you have Flutter installed, you can clone this repository to your local machine using the following command:
 
 ```
-$ https://github.com/valexand-ulb/codex-woltiensis.git
+$ https://github.com/valexand-ulb/codex_woltiensis.git
 ```
 
 
