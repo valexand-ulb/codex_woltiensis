@@ -52,7 +52,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
     return Scaffold(
       appBar: DefaultAppBar(),
       body: RefreshIndicator(
-          onRefresh: _loadSongs,
+          onRefresh: () async {await _loadSongs(true);},
           child: Column(children: [
             renderProgressBar(context),
             Expanded(
@@ -62,13 +62,13 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
     );
   }
 
-  Future<void> _loadSongs() async {
+  Future<void> _loadSongs([bool serverReload=false]) async {
     if (mounted) {
       setState(() => loading = true);
       Timer(const Duration(seconds: 1), () async {
         bool exists = await Song.isFileCached(Song.filename);
         final List<Song> songs;
-        if (exists) {
+        if (exists & !serverReload) {
           songs = await Song.fetchAllByFile();
         } else {
           songs = await Song.fetchAll();

@@ -45,7 +45,6 @@ class Song{
       songs.add(Song.fromJson(item));
     }
     saveGeneralJsonToFile(resp.body);
-    print('loaded ${songs.length} songs from server');
     return songs;
   }
 
