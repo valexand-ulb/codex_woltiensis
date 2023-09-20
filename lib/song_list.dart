@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:codex_woltiensis/components/banner_image.dart';
@@ -7,6 +8,7 @@ import 'package:codex_woltiensis/components/song_tile.dart';
 import 'package:codex_woltiensis/models/song.dart';
 import 'package:codex_woltiensis/song_detail.dart';
 import 'package:codex_woltiensis/style.dart';
+import 'package:path_provider/path_provider.dart';
 
 const ListItemHeight = 245.0;
 
@@ -44,7 +46,13 @@ class _SongListState extends State<SongList> {
     if (mounted) {
       setState(() => loading = true);
       Timer(const Duration(seconds: 1), () async {
-        final List<Song> songs = await Song.fetchAll();
+        bool exists = await Song.isFileCached(Song.filename);
+        final List<Song> songs;
+        if (exists) {
+          songs = await Song.fetchAllByFile();
+        } else {
+          songs = await Song.fetchAll();
+        }
         setState(() {
           this.songs = songs;
           loading = false;

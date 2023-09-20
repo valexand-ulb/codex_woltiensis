@@ -11,6 +11,7 @@ part 'song.g.dart';
 
 @JsonSerializable()
 class Song{
+  static const String filename = 'codex_woltiensis.json';
   final int id;
   final String name;
   final String url;
@@ -30,7 +31,7 @@ class Song{
        _$SongFromJson(json);
 
   static Future<List<Song>> fetchAll() async {
-    Uri uri = Endpoint.uri('codex_woltiensis.json');
+    Uri uri = Endpoint.uri(filename);
 
     final http.Response resp = await http.get(uri);
 
@@ -43,6 +44,22 @@ class Song{
       var item = jsonItem;
       songs.add(Song.fromJson(item));
     }
+    saveGeneralJsonToFile(resp.body);
+    print('loaded ${songs.length} songs from server');
+    return songs;
+  }
+
+  static Future<List<Song>> fetchAllByFile() async {
+    Directory tempDirectory = await getTemporaryDirectory();
+    File file = File('${tempDirectory.path}/$filename');
+    String fileContent = await file.readAsString();
+
+    List<Song> songs = <Song>[];
+    for (var jsonItem in json.decode(fileContent)) {
+      var item = jsonItem;
+      songs.add(Song.fromJson(item));
+    }
+
     return songs;
   }
 
@@ -66,7 +83,13 @@ class Song{
 
     final Directory tempDirectory = await getTemporaryDirectory();
     final File file = File('${tempDirectory.path}/$id.json');
-    print('Saving to : ${tempDirectory.path}/$id.json');
+
+    file.writeAsString(jsonString);
+  }
+
+  static void saveGeneralJsonToFile(String jsonString) async {
+    final Directory tempDirectory = await getTemporaryDirectory();
+    final File file = File('${tempDirectory.path}/$filename');
     file.writeAsString(jsonString);
   }
 
@@ -77,9 +100,17 @@ class Song{
     String fileContent = await file.readAsString();
     Map<String, dynamic> itemMap = json.decode(fileContent);
 
-    print('Loaded song: "${itemMap['name']}" from cache');
     return Song.fromJson(itemMap);
   }
+
+  static Future<bool> isFileCached(String filename) async {
+    final Directory tempDirectory = await getTemporaryDirectory();
+    final File file = File('${tempDirectory.path}/$filename');
+    bool fileExists = await file.exists();
+    return fileExists;
+  }
+
+
 
 
 }

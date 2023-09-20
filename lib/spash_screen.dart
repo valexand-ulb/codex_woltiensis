@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:codex_woltiensis/song_list.dart';
 
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
