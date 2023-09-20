@@ -17,14 +17,34 @@ class SongList extends StatefulWidget {
   _SongListState createState() => _SongListState();
 }
 
-class _SongListState extends State<SongList> {
+class _SongListState extends State<SongList> with WidgetsBindingObserver{
   List<Song> songs = <Song>[];
   bool loading = false;
+  bool cleaningInProgress = false;
 
   @override
   void initState() {
     super.initState();
     _loadSongs();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state){
+    if (state == AppLifecycleState.paused && !cleaningInProgress) {
+      // Transitioning from paused to inactive, initiate cache cleaning
+      cleaningInProgress = true;
+    } else if (state == AppLifecycleState.inactive && cleaningInProgress) {
+      // App is now inactive, perform cache cleaning
+      _deleteCachedJsonfiles();
+      cleaningInProgress = false;
+    }
   }
 
   @override
@@ -133,5 +153,19 @@ class _SongListState extends State<SongList> {
         overlay,
       ],
     );
+  }
+
+  Future<void> _deleteCachedJsonfiles() async {
+    try {
+      Directory tempDir = await getTemporaryDirectory();
+      for (var file in tempDir.listSync()) {
+        if (file.path.endsWith('.json')) {
+          file.delete();
+        }
+      }
+    } catch (e) {
+      print('Error while cleaning cache: $e');
+    }
+    cleaningInProgress = false;
   }
 }

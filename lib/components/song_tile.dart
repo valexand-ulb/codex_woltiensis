@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:codex_woltiensis/models/song.dart';
 import 'package:codex_woltiensis/style.dart';
+import 'package:flutter/material.dart';
 
 const SongTileHeight = 100.0;
 
