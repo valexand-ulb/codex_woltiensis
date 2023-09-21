@@ -50,7 +50,6 @@ class _SearchPageState extends State<SearchPage> {
           ),
           onTap: () {
             // Navigate to the detail page
-            print(index);
             _navigateToSongDetails(context, foundedSongs[index].id);
           },
         );
@@ -88,7 +87,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _loadSongs() async {
-    final List<Song> songs = await Song.fetchAll();
+    final List<Song> songs = await Song.fetchAllByFile();
     setState(() {
       this.songs = songs;
       foundedSongs = songs;
@@ -109,8 +108,6 @@ class _SearchPageState extends State<SearchPage> {
     final suggestions = songs.where(
         (song) => song.name.toLowerCase().contains(query.toLowerCase())
     ).toList();
-
-    print(suggestions);
 
     setState(() => foundedSongs = suggestions);
   }
