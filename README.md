@@ -4,7 +4,6 @@ A flutter implementation of the codex woltiensis
 # Codex Woltiensis Songbook App
 
 This Flutter application is a digital songbook for the "Codex Woltiensis 🐇", a small collection of songs that we've compiled for easy reference and use. With this app, you'll be able to view and search for songs, as well as save your favorites for easy access.
-⚠️ There will be no more commit until the end of june. Waiting for code review.
 ## Getting Started
 
 To get started with this app, you'll need to have Flutter installed on your machine. You can find detailed instructions for installing Flutter [here](https://flutter.dev/docs/get-started/install).
