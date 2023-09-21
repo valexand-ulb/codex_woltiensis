@@ -19,7 +19,7 @@ From there, you can open the project in your favorite IDE or text editor, and ru
 
 ## Features
 
-The Codex Woltiensis Songbook App will probably one day includes the following features (non exhaustive):
+The Codex Woltiensis Songbook App will probably one day includes the following features (non-exhaustive):
 - [x] View a list of songs in the collection
 - [ ] Save your favorite songs for easy access
 - [X] Search for songs by title
