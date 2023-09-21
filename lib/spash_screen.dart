@@ -1,7 +1,6 @@
+import 'package:codex_woltiensis/song_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:codex_woltiensis/song_list.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,9 +16,9 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(const Duration(seconds: 2), (){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder:
-      (BuildContext context) => SongList()));
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (BuildContext context) => SongList()));
     });
   }
 
@@ -43,8 +42,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   DecorationImage _buildDecorationImage() {
     return const DecorationImage(
-          image:  AssetImage('assets/images/splash_screen.png'),
-      );
+      image: AssetImage('assets/images/splash_screen.png'),
+    );
   }
 
   LinearGradient _buildLinearGradient() {

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:codex_woltiensis/components/banner_image.dart';
 import 'package:codex_woltiensis/components/default_app_bar.dart';
 import 'package:codex_woltiensis/models/song.dart';
 import 'package:codex_woltiensis/style.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class SongDetail extends StatefulWidget {
   final int songID;
@@ -31,7 +30,7 @@ class _SongDetailState extends State<SongDetail> {
     bool fileExists = await Song.isFileCached('$songID.json');
     final Song song;
 
-    if (fileExists){
+    if (fileExists) {
       song = await Song.fetchByFile(songID);
     } else {
       song = await Song.fetchByID(songID);
@@ -94,7 +93,6 @@ class _SongDetailState extends State<SongDetail> {
             styleSheet: MarkdownStyleSheet.fromTheme(ThemeData(
                 textTheme: const TextTheme(
               bodyMedium: Styles.textDefault,
-            ))))
-    );
+            )))));
   }
 }

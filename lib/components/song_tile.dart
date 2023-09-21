@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 const SongTileHeight = 100.0;
 
-class SongTile extends StatelessWidget{
+class SongTile extends StatelessWidget {
   final Song song;
   final bool darkTheme;
 
   SongTile(this.song, this.darkTheme);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final String title = song.name.toUpperCase();
     final String subtitle = song.comments.toUpperCase();
 
@@ -21,9 +21,8 @@ class SongTile extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: darkTheme
-              ? Styles.songTitleDark
-              : Styles.songTitleLight),
+          Text(title,
+              style: darkTheme ? Styles.songTitleDark : Styles.songTitleLight),
           Expanded(child: Text(subtitle, style: Styles.songTitleSubTitle)),
         ],
       ),

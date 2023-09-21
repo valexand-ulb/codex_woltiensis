@@ -10,7 +10,7 @@ import 'package:path_provider/path_provider.dart';
 part 'song.g.dart';
 
 @JsonSerializable()
-class Song{
+class Song {
   static const String filename = 'codex_woltiensis.json';
   final int id;
   final String name;
@@ -27,8 +27,7 @@ class Song{
         comments = '',
         text = '';
 
-  factory Song.fromJson(Map<String, dynamic> json) =>
-       _$SongFromJson(json);
+  factory Song.fromJson(Map<String, dynamic> json) => _$SongFromJson(json);
 
   static Future<List<Song>> fetchAll() async {
     Uri uri = Endpoint.uri(filename);
@@ -108,8 +107,4 @@ class Song{
     bool fileExists = await file.exists();
     return fileExists;
   }
-
-
-
-
 }

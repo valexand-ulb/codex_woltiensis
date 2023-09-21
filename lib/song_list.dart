@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:codex_woltiensis/components/banner_image.dart';
 import 'package:codex_woltiensis/components/default_app_bar.dart';
 import 'package:codex_woltiensis/components/song_tile.dart';
 import 'package:codex_woltiensis/models/song.dart';
+import 'package:codex_woltiensis/searchpage.dart';
 import 'package:codex_woltiensis/song_detail.dart';
 import 'package:codex_woltiensis/style.dart';
+import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 const ListItemHeight = 245.0;
@@ -17,7 +18,7 @@ class SongList extends StatefulWidget {
   _SongListState createState() => _SongListState();
 }
 
-class _SongListState extends State<SongList> with WidgetsBindingObserver{
+class _SongListState extends State<SongList> with WidgetsBindingObserver {
   List<Song> songs = <Song>[];
   bool loading = false;
   bool cleaningInProgress = false;
@@ -36,7 +37,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state){
+  void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused && !cleaningInProgress) {
       // Transitioning from paused to inactive, initiate cache cleaning
       cleaningInProgress = true;
@@ -50,9 +51,20 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefaultAppBar(),
+      appBar: DefaultAppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.white),
+            onPressed: () {
+              _navigateToSearchPage(context);
+            },
+          ),
+        ],
+      ),
       body: RefreshIndicator(
-          onRefresh: () async {await _loadSongs(true);},
+          onRefresh: () async {
+            await _loadSongs(true);
+          },
           child: Column(children: [
             renderProgressBar(context),
             Expanded(
@@ -62,7 +74,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
     );
   }
 
-  Future<void> _loadSongs([bool serverReload=false]) async {
+  Future<void> _loadSongs([bool serverReload = false]) async {
     if (mounted) {
       setState(() => loading = true);
       Timer(const Duration(seconds: 1), () async {
@@ -90,15 +102,15 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
           )
         : Container());
   }
-  
+
   ListView _renderListView(BuildContext context) {
     return ListView.builder(
       itemCount: songs.length,
       itemBuilder: _listViewItemBuilder,
     );
   }
-  
-  GridView _renderGridView(BuildContext context){
+
+  GridView _renderGridView(BuildContext context) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, childAspectRatio: 1.0),
@@ -123,7 +135,16 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
     );
   }
 
-  void _navigateToSongDetails(BuildContext context, int songID){
+  void _navigateToSearchPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SearchPage(),
+      ),
+    );
+  }
+
+  void _navigateToSongDetails(BuildContext context, int songID) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -132,7 +153,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver{
     );
   }
 
-  Column _tileFooter(Song song){
+  Column _tileFooter(Song song) {
     final info = SongTile(song, true);
     final overlay = Container(
       height: 80.0,

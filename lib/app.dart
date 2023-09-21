@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:codex_woltiensis/spash_screen.dart';
+import 'package:flutter/material.dart';
 
-class App extends StatelessWidget{
+class App extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(home: SplashScreen());
   }
 }

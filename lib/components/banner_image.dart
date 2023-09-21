@@ -12,7 +12,8 @@ class BannerImage extends StatelessWidget {
     CachedNetworkImage image = CachedNetworkImage(
       imageUrl: url,
       fit: BoxFit.fitWidth,
-      placeholder: (context, url) => const CircularProgressIndicator(color: Colors.white),
+      placeholder: (context, url) =>
+          const CircularProgressIndicator(color: Colors.white),
       errorWidget: (context, url, error) => Container(),
     );
 
