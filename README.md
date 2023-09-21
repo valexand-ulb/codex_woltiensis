@@ -23,17 +23,18 @@ From there, you can open the project in your favorite IDE or text editor, and ru
 The Codex Woltiensis Songbook App will probably one day includes the following features (non exhaustive):
 - [x] View a list of songs in the collection
 - [ ] Save your favorite songs for easy access
-- [ ] Search for songs by title, artist, or lyrics
+- [X] Search for songs by title
 - [x] View the lyrics and chords for each song
 - [x]  Dark mode support
 - [ ]  Songs editor
 
 ## TODO's
 - [x] Rendering of bold, italic, and underlined text due to markdown
-- [ ] 🔧 Add a search bar
+- [x] 🔧 Add a search bar
 - [ ] 🔧 Add a favorites page
 - [ ] 🔧 Add a settings page
 - [ ] 🔧 Add a song editor
+- [ ] 🔧 Change style of entered text in the search field
 
 
 ## Acknowledgements
