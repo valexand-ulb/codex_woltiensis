@@ -50,7 +50,8 @@ class _SearchPageState extends State<SearchPage> {
           ),
           onTap: () {
             // Navigate to the detail page
-            _navigateToSongDetails(context, songs[index].id);
+            print(index);
+            _navigateToSongDetails(context, foundedSongs[index].id);
           },
         );
   }
