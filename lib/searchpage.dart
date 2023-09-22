@@ -11,6 +11,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  late TextEditingController controller;
   List<Song> songs = <Song>[];
   List<Song> foundedSongs = <Song>[];
 
@@ -19,7 +20,14 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
+    controller = TextEditingController();
     _loadSongs();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -31,11 +39,11 @@ class _SearchPageState extends State<SearchPage> {
     return ListView.builder(
         itemCount: foundedSongs.length,
         itemBuilder: (context, index) {
-          return _SongListTile(index, context);
+          return _songListTile(context, index);
         });
   }
 
-  ListTile _SongListTile(int index, BuildContext context) {
+  ListTile _songListTile(BuildContext context, int index) {
     return ListTile(
           leading: CachedNetworkImage(
             width: 50.0,
@@ -65,7 +73,9 @@ class _SearchPageState extends State<SearchPage> {
 
   TextField _buildTextField() {
     return TextField(
+      style: Styles.navBarTitle,
       decoration: _setinputDecoration(),
+      controller: controller,
       onChanged:_searchSongs
     );
   }
@@ -76,7 +86,8 @@ class _SearchPageState extends State<SearchPage> {
       suffixIcon: IconButton(
           onPressed: () {
             // Clear the text field
-
+            controller.clear();
+            _searchSongs('');
           },
           icon: const Icon(Icons.clear, color: Colors.white)),
       hintText: 'Search',
