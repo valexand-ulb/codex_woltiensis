@@ -1,4 +1,5 @@
 import 'package:codex_woltiensis/song_list.dart';
+import 'package:codex_woltiensis/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,25 +33,17 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-        gradient: _buildLinearGradient(),
-        image: _buildDecorationImage(),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Styles.woltjeRed,
+          image: _buildDecorationImage(),
+        )
       ),
-    ));
+    );
   }
 
   DecorationImage _buildDecorationImage() {
     return const DecorationImage(
-      image: AssetImage('assets/images/splash_screen.png'),
-    );
-  }
-
-  LinearGradient _buildLinearGradient() {
-    return const LinearGradient(
-      begin: Alignment.bottomLeft,
-      end: Alignment.topRight,
-      colors: <Color>[Color(0xFFEC2143), Color(0xFF12A113)],
-    );
+        image: AssetImage('assets/images/splash_screen.png'));
   }
 }

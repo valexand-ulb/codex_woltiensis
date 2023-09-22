@@ -12,6 +12,7 @@ class Styles {
   static const Color _textColorFaint = Color(0xFF999999);
   static const Color textColorBright = Color(0xFFFFFFFF);
   static const Color accentColor = Color(0xFFFDDB20);
+  static const Color woltjeRed = Color(0xFFEC2143);
   static const String _fontNameDefault = 'PlayfairDisplay';
 
   static const navBarTitle = TextStyle(
