@@ -36,14 +36,14 @@ The Codex Woltiensis Songbook App will probably one day includes the following f
 - [ ] 🔧 Add a song editor
 - [ ] 🔧 Change style of entered text in the search field
 
-## Get the app 📲
-You can download the app on the release pageof this repository using either Github on mobile or by sending the .apk installer.
-Since the app is not yet on the official store, you'll need to allow your phone to install apps from unknown sources. You can do this by going to your phone's settings, then to the security tab, and enabling the "Unknown sources" option.
-A security warning may appear, but you can safely ignore it and install the app.
-<center>
+## Get the app 📲 (Android only)
+You can download the app on the release page of this repository using either GitHub on mobile or by sending the .apk installer.
+<div style="text-align: center;">
 <img src="https://i.imgur.com/I4BULVt.png" width="50%" height="50%"/>
-</center>
+</div>
 
+⚠️ Since the app is not yet on the official store, you'll need to allow your phone to install apps from unknown sources. You can do this by going to your phone's settings, then to the security tab, and enabling the "Unknown sources" option.
+A security warning may appear, but you can safely ignore it and install the app.
 
 ## Acknowledgements
 ⚠️ This project is made by a student trying to learn the flutter framework. The code will be subject to a lot of changes for learning purposes.
