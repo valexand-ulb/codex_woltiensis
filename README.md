@@ -7,15 +7,15 @@ This Flutter application is a digital songbook for the "Codex Woltiensis 🐇", 
 
 ## Get the app 📲 (Android only)
 You can download the app on the release page of this repository using either GitHub on mobile or by sending the .apk installer.
-<div style="text-align: center;">
+<center>
 <img src="https://i.imgur.com/I4BULVt.png" width="50%" height="50%" alt="Where find the release apk"/>
-</div>
+</center>
 
 Once you have the .apk file, you can install it on your phone by opening it. You can do this by opening the file manager on your phone, navigating to the .apk file, and opening it.
 
-<div style="text-align: center;">
+<center>
 <img src="https://i.imgur.com/jrYum5E.jpg" width="200" alt="intall it"/>
-</div>
+</center>
 
 ⚠️ Since the app is not yet on the official store, you'll need to allow your phone to install apps from unknown sources. You can do this by going to your phone's settings, then to the security tab, and enabling the "Unknown sources" option.
 A security warning may appear, but you can safely ignore it and install the app.
