@@ -26,11 +26,11 @@ class _SongDetailState extends State<SongDetail> {
     _loadSong();
   }
 
-  void _loadSong() async {
+  void _loadSong([bool serverReload = false]) async {
     bool fileExists = await Song.isFileCached('$songID.json');
     final Song song;
 
-    if (fileExists) {
+    if (fileExists && !serverReload) {
       song = await Song.fetchByFile(songID);
     } else {
       song = await Song.fetchByID(songID);
@@ -44,11 +44,16 @@ class _SongDetailState extends State<SongDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: _renderBody(context, song),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          _loadSong(true);
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: _renderBody(context, song),
+          ),
         ),
       ),
     );
