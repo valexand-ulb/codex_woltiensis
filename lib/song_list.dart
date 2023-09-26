@@ -21,7 +21,6 @@ class SongList extends StatefulWidget {
 class _SongListState extends State<SongList> with WidgetsBindingObserver {
   List<Song> songs = <Song>[];
   bool loading = false;
-  bool cleaningInProgress = false;
 
   @override
   void initState() {
@@ -38,13 +37,8 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused && !cleaningInProgress) {
-      // Transitioning from paused to inactive, initiate cache cleaning
-      cleaningInProgress = true;
-    } else if (state == AppLifecycleState.inactive && cleaningInProgress) {
-      // App is now inactive, perform cache cleaning
+    if (state == AppLifecycleState.paused) {
       _deleteCachedJsonfiles();
-      cleaningInProgress = false;
     }
   }
 
@@ -187,6 +181,5 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
     } catch (e) {
       print('Error while cleaning cache: $e');
     }
-    cleaningInProgress = false;
   }
 }
