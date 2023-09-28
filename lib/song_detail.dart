@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:codex_woltiensis/components/banner_image.dart';
 import 'package:codex_woltiensis/components/default_app_bar.dart';
 import 'package:codex_woltiensis/models/song.dart';
@@ -30,49 +28,28 @@ class _SongDetailState extends State<SongDetail> {
   }
 
   void _loadSong([bool serverReload = false]) async {
-    if (mounted) {
-      setState(() => loading = true);
-      Timer(const Duration(milliseconds: 500), () async {
-        final Song song;
-        bool fileExists = await Song.isFileCached('$songID.json');
+    bool fileExists = await Song.isFileCached('$songID.json');
+    final Song song;
 
-        if (fileExists && !serverReload) {
-          song = await Song.fetchByFile(songID);
-        } else {
-          song = await Song.fetchByID(songID);
-        }
-
-        setState(() {
-          loading = false;
-          this.song = song;
-        });
-      });
+    if (fileExists && !serverReload) {
+      song = await Song.fetchByFile(songID);
+    } else {
+      song = await Song.fetchByID(songID);
     }
-
-    if (mounted) {}
+    if (mounted) {
+      setState(() => this.song = song);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          _loadSong(true);
-        },
+      body: SingleChildScrollView(
         child: Column(
-          children: [
-            renderProgressBar(context),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: _renderBody(context, song),
-                ),
-              ),
-            ),
-          ],
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: _renderBody(context, song),
         ),
       ),
     );
@@ -118,15 +95,5 @@ class _SongDetailState extends State<SongDetail> {
                 textTheme: const TextTheme(
               bodyMedium: Styles.textDefault,
             )))));
-  }
-
-  Widget renderProgressBar(BuildContext context) {
-    return (loading
-        ? const LinearProgressIndicator(
-            value: null,
-            backgroundColor: Colors.white,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.grey),
-          )
-        : Container());
   }
 }
