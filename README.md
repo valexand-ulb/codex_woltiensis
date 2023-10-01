@@ -52,7 +52,7 @@ The Codex Woltiensis Songbook App will probably one day includes the following f
 - [ ] 🔧 Add a favorites page
 - [ ] 🔧 Add a settings page
 - [ ] 🔧 Add a song editor
-- [ ] 🔧 Change style of entered text in the search field
+- [x] 🔧 Change style of entered text in the search field
 
 ## Acknowledgements
 ⚠️ This project is made by a student trying to learn the flutter framework. The code will be subject to a lot of changes for learning purposes.
