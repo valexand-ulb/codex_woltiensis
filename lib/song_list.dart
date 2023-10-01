@@ -20,7 +20,10 @@ class SongList extends StatefulWidget {
 
 class _SongListState extends State<SongList> with WidgetsBindingObserver {
   List<Song> songs = <Song>[];
+  final _scrollController = ScrollController();
   bool loading = false;
+  bool onTop = true;
+
 
   @override
   void initState() {
@@ -46,6 +49,10 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(
+        title: GestureDetector(
+          onTap: () => _handleTitleTap(),
+          child: const Text("CODEX WOLTIENSIS", style: Styles.navBarTitle),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Colors.white),
@@ -66,6 +73,24 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
             )
           ])),
     );
+  }
+
+  void _handleTitleTap() {
+    if (!onTop) {
+      _scrollController.animateTo(
+        0.0,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 300),
+      );
+      onTop = true;
+    } else {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 300),
+      );
+      onTop = false;
+    }
   }
 
   Future<void> _loadSongs([bool serverReload = false]) async {
@@ -99,6 +124,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
 
   ListView _renderListView(BuildContext context) {
     return ListView.builder(
+      controller: _scrollController,
       itemCount: songs.length,
       itemBuilder: _listViewItemBuilder,
     );

@@ -15,11 +15,6 @@ class DefaultAppBar extends AppBar {
           actions: actions,
         );
 
-  // @override
-  // final Widget title = Text(
-  //   "Codex woltiensis".toUpperCase(),
-  //   style: Styles.navBarTitle,
-  // );
 
   @override
   final IconThemeData iconTheme = const IconThemeData(color: Colors.black);
