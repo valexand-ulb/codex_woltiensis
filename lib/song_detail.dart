@@ -27,15 +27,11 @@ class _SongDetailState extends State<SongDetail> {
     _loadSong();
   }
 
-  void _loadSong([bool serverReload = false]) async {
-    bool fileExists = await Song.isFileCached('$songID.json');
+  void _loadSong() async {
     final Song song;
 
-    if (fileExists && !serverReload) {
-      song = await Song.fetchByFile(songID);
-    } else {
-      song = await Song.fetchByID(songID);
-    }
+    song = await Song.fetchByIDFromDatabase(songID);
+
     if (mounted) {
       setState(() => this.song = song);
     }

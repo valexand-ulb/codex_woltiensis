@@ -3,15 +3,18 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:codex_woltiensis/endpoint.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:path_provider/path_provider.dart';
+
 
 part 'song.g.dart';
 
 @JsonSerializable()
 class Song {
   static const String filename = 'codex_woltiensis.json';
+  static final _database = FirebaseDatabase.instance.ref();
   final int id;
   final String name;
   final String url;
@@ -48,6 +51,7 @@ class Song {
   }
 
   static Future<List<Song>> fetchAllByFile() async {
+    print('fetching from file');
     Directory tempDirectory = await getTemporaryDirectory();
     File file = File('${tempDirectory.path}/$filename');
     String fileContent = await file.readAsString();
@@ -61,7 +65,29 @@ class Song {
     return songs;
   }
 
+  static Future<List<Song>> fetchAllFromDatabase() async{
+    print('fetching from database');
+    List<Song> songs = <Song>[];
+    Completer<List<Song>> completer = Completer<List<Song>>();
+
+    _database.child('songs').onValue.listen((event) {
+      final dynamic jsonValue = event.snapshot.value;
+      for (var jsonItem in jsonValue) {
+        //print(jsonItem);
+        Map<String, dynamic> item = jsonItem.cast<String, dynamic>();
+        songs.add(Song.fromJson(item));
+      }
+
+      if (!completer.isCompleted) {
+        completer.complete(songs);
+      }
+    });
+    await completer.future;
+    return songs;
+  }
+
   static Future<Song> fetchByID(int id) async {
+    print('fetching song $id');
     Uri uri = Endpoint.uri('songs/$id.json');
 
     final http.Response resp = await http.get(uri);
@@ -92,6 +118,7 @@ class Song {
   }
 
   static Future<Song> fetchByFile(int songID) async {
+    print('fetching song $songID from file');
     Directory tempDir = await getTemporaryDirectory();
     File file = File('${tempDir.path}/$songID.json');
 
@@ -106,5 +133,26 @@ class Song {
     final File file = File('${tempDirectory.path}/$filename');
     bool fileExists = await file.exists();
     return fileExists;
+  }
+
+  static Future<Song> fetchByIDFromDatabase(int songID) async {
+    print('fetching song $songID from database');
+    Song song = Song.blank();
+    Completer<Song> completer = Completer<Song>();
+
+    _database.child(songID.toString()).onValue.listen((event) {
+      final dynamic jsonValue = event.snapshot.value;
+      Map<String, dynamic> item = jsonValue.cast<String, dynamic>();
+
+      song = Song.fromJson(item);
+
+      if (!completer.isCompleted) {
+        completer.complete(song);
+      }
+
+    });
+
+    await completer.future;
+    return song;
   }
 }

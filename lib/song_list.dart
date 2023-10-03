@@ -64,10 +64,10 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
       ),
       body: RefreshIndicator(
           onRefresh: () async {
-            await _loadSongs(true);
+            await _loadSongs();
           },
           child: Column(children: [
-            renderProgressBar(context),
+            _renderProgressBar(context),
             Expanded(
               child: _renderListView(context),
             )
@@ -93,17 +93,11 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
     }
   }
 
-  Future<void> _loadSongs([bool serverReload = false]) async {
+  Future<void> _loadSongs() async {
     if (mounted) {
       setState(() => loading = true);
       Timer(const Duration(seconds: 1), () async {
-        bool exists = await Song.isFileCached(Song.filename);
-        final List<Song> songs;
-        if (exists & !serverReload) {
-          songs = await Song.fetchAllByFile();
-        } else {
-          songs = await Song.fetchAll();
-        }
+        final List<Song> songs = await Song.fetchAllFromDatabase();
         setState(() {
           this.songs = songs;
           loading = false;
@@ -112,7 +106,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
     }
   }
 
-  Widget renderProgressBar(BuildContext context) {
+  Widget _renderProgressBar(BuildContext context) {
     return (loading
         ? const LinearProgressIndicator(
             value: null,

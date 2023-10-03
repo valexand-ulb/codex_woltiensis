@@ -49,7 +49,7 @@ The Codex Woltiensis Songbook App will probably one day includes the following f
 ## TODO's
 - [x] Rendering of bold, italic, and underlined text due to markdown
 - [x] 🔧 Add a search bar
-- [ ] 🔧 Change to Firebase realtime database
+- [x] 🔧 Change to Firebase realtime database
 - [ ] 🔧 Add a favorites page
 - [ ] 🔧 Add a settings page
 - [ ] 🔧 Add a song editor

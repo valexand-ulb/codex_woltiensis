@@ -42,6 +42,8 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_markdown: ^0.6.15
   path_provider: ^2.1.1
+  firebase_core: ^2.16.0
+  firebase_database: ^10.2.6
 
 dev_dependencies:
   flutter_test:
