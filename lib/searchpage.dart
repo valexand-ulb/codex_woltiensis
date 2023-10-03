@@ -98,7 +98,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _loadSongs() async {
-    final List<Song> songs = await Song.fetchAllByFile();
+    final List<Song> songs = await Song.fetchAllFromDatabase();
     setState(() {
       this.songs = songs;
       foundedSongs = songs;
