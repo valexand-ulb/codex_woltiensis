@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:codex_woltiensis/components/banner_image.dart';
 import 'package:codex_woltiensis/components/default_app_bar.dart';
@@ -9,9 +8,8 @@ import 'package:codex_woltiensis/searchpage.dart';
 import 'package:codex_woltiensis/song_detail.dart';
 import 'package:codex_woltiensis/style.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
-const ListItemHeight = 245.0;
+const listItemHeight = 245.0;
 
 class SongList extends StatefulWidget {
   const SongList({super.key});
@@ -38,13 +36,6 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused) {
-      _deleteCachedJsonfiles();
-    }
   }
 
   @override
@@ -140,10 +131,10 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
     return GestureDetector(
       onTap: () => _navigateToSongDetails(context, song.id),
       child: SizedBox(
-        height: ListItemHeight,
+        height: listItemHeight,
         child: Stack(
           children: [
-            BannerImage(song.url, ListItemHeight),
+            BannerImage(song.url, listItemHeight),
             _tileFooter(song),
           ],
         ),
@@ -190,18 +181,5 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
         overlay,
       ],
     );
-  }
-
-  Future<void> _deleteCachedJsonfiles() async {
-    try {
-      Directory tempDir = await getTemporaryDirectory();
-      for (var file in tempDir.listSync()) {
-        if (file.path.endsWith('.json')) {
-          file.delete();
-        }
-      }
-    } catch (e) {
-      print('Error while cleaning cache: $e');
-    }
   }
 }
