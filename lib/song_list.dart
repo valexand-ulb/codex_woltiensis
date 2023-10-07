@@ -14,6 +14,8 @@ import 'package:path_provider/path_provider.dart';
 const ListItemHeight = 245.0;
 
 class SongList extends StatefulWidget {
+  const SongList({super.key});
+
   @override
   _SongListState createState() => _SongListState();
 }
@@ -137,7 +139,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
     final Song song = songs[index];
     return GestureDetector(
       onTap: () => _navigateToSongDetails(context, song.id),
-      child: Container(
+      child: SizedBox(
         height: ListItemHeight,
         child: Stack(
           children: [
@@ -153,7 +155,7 @@ class _SongListState extends State<SongList> with WidgetsBindingObserver {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SearchPage(),
+        builder: (context) => const SearchPage(),
       ),
     );
   }

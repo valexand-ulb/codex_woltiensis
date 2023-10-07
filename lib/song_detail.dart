@@ -8,10 +8,10 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 class SongDetail extends StatefulWidget {
   final int songID;
 
-  SongDetail(this.songID);
+  const SongDetail(this.songID, {super.key});
 
   @override
-  createState() => _SongDetailState(this.songID);
+  createState() => _SongDetailState(songID);
 }
 
 class _SongDetailState extends State<SongDetail> {

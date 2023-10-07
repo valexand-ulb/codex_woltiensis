@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (BuildContext context) => SongList()));
+          MaterialPageRoute(builder: (BuildContext context) => const SongList()));
     });
   }
 

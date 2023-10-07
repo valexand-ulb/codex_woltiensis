@@ -8,14 +8,14 @@ class SongTile extends StatelessWidget {
   final Song song;
   final bool darkTheme;
 
-  SongTile(this.song, this.darkTheme);
+  const SongTile(this.song, this.darkTheme, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final String title = song.name.toUpperCase();
     final String subtitle = song.comments.toUpperCase();
 
-    return Container(
+    return SizedBox(
       height: SongTileHeight,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

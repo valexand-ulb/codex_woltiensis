@@ -143,7 +143,6 @@ class Song {
       if (!completer.isCompleted) {
         completer.complete(song);
       }
-
     });
 
     await completer.future;
